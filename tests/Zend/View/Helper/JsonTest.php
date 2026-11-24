@@ -21,6 +21,8 @@
  */
 
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * Test class for Zend_View_Helper_Json
  *
@@ -29,9 +31,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_View
- * @group      Zend_View_Helper
  */
+#[Group('Zend_View')]
+#[Group('Zend_View_Helper')]
 class Zend_View_Helper_JsonTest extends PHPUnit\Framework\TestCase
 {
     protected $helper;
@@ -92,9 +94,7 @@ class Zend_View_Helper_JsonTest extends PHPUnit\Framework\TestCase
         $this->verifyJsonHeader();
     }
 
-    /**
-     * @group ZF-10675
-     */
+    #[Group('ZF-10675')]
     public function testJsonHelperReplacesContentTypeReponseHeaderIfAlreadySet()
     {
         $this->response->setHeader('Content-Type', 'text/html');
@@ -125,9 +125,7 @@ class Zend_View_Helper_JsonTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($layout->isEnabled());
     }
 
-    /**
-     * @group ZF-12397
-     */
+    #[Group('ZF-12397')]
     public function testJsonHelperWithKeepLayoutAsArray()
     {
         $layout = Zend_Layout::startMvc();
@@ -145,18 +143,14 @@ class Zend_View_Helper_JsonTest extends PHPUnit\Framework\TestCase
         $this->assertSame(array('foobar'), $data);
     }
 
-    /**
-     * @group ZF-10977
-     */
+    #[Group('ZF-10977')]
     public function testJsonHelperWillAcceptPreencodedJson()
     {
         $data = $this->helper->json(Zend_Json::encode(array('f')), false, false);
         $this->assertEquals('["f"]', $data);
     }
 
-    /**
-     * @group ZF-10977
-     */
+    #[Group('ZF-10977')]
     public function testJsonHelperWillSendHeadersWhenProvidedWithPreencodedJson()
     {
         $data = $this->helper->json(Zend_Json::encode(array('f')), false, false);
